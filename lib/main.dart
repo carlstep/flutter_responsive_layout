@@ -36,8 +36,16 @@ class _MainPageState extends State<MainPage> {
           padding: const EdgeInsets.all(20.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 500) {
-                return GridData();
+              if (constraints.maxWidth > 1200) {
+                return GridData(
+                  aspectRatio: 8,
+                  axisCount: 4,
+                );
+              } else if (constraints.maxWidth > 800) {
+                return GridData(
+                  aspectRatio: 4,
+                  axisCount: 2,
+                );
               } else {
                 return ListData();
               }
@@ -70,13 +78,18 @@ class ListData extends StatelessWidget {
 class GridData extends StatelessWidget {
   const GridData({
     Key? key,
+    required this.aspectRatio,
+    required this.axisCount,
   }) : super(key: key);
+
+  final double aspectRatio;
+  final int axisCount;
 
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 2,
-      childAspectRatio: 5,
+      crossAxisCount: axisCount,
+      childAspectRatio: aspectRatio,
       children: List.generate(20, (index) {
         return ListTile(
           leading: Icon(Icons.person),
