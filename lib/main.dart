@@ -36,9 +36,11 @@ class _MainPageState extends State<MainPage> {
           padding: const EdgeInsets.all(20.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              print('Media: $height');
-              print('Builder: ${constraints.maxHeight}');
-              return ListData();
+              if (constraints.maxWidth > 500) {
+                return GridData();
+              } else {
+                return ListData();
+              }
             },
           ),
         ));
